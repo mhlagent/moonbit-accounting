@@ -15,12 +15,12 @@ version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = ""
+repository = "https://github.com/mhlagent/moonbit-accounting"
 
 license = "Apache-2.0"
 
-keywords = [ ]
+keywords = ["accounting", "financial-report", "ledger", "moonbit"]
 
 preferred_target = "wasm-gc"
 
-description = ""
+description = "Generate financial statements from normalized accounting entries."
