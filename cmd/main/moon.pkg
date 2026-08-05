@@ -1,0 +1,9 @@
+// import {
+//   "mhlagent/moonbit-accounting" @lib,
+// }
+
+pkgtype(kind: "executable")
+
+import {
+  "mhlagent/moonbit-accounting" @moonbit_accounting,
+}
