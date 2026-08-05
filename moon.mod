@@ -19,7 +19,7 @@ repository = "https://github.com/mhlagent/moonbit-accounting"
 
 license = "Apache-2.0"
 
-keywords = ["accounting", "financial-report", "ledger", "moonbit"]
+keywords = [ "accounting", "financial-report", "ledger", "moonbit" ]
 
 preferred_target = "wasm-gc"
 
