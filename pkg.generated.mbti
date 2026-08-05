@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "mhlagent/moonbit-accounting"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn generate(StatementKind, String, Array[Entry], Array[AccountMapping], comparison? : String) -> Report
+
+// Errors
+
+// Types and methods
+pub struct AccountMapping {
+  account : String
+  line : String
+  kind : StatementKind
+  factor : Int
+} derive(Eq, @debug.Debug)
+pub fn AccountMapping::new(String, String, StatementKind, factor? : Int) -> Self
+
+pub struct Entry {
+  account : String
+  period : String
+  debit : Int
+  credit : Int
+  cash : Bool
+} derive(Eq, @debug.Debug)
+pub fn Entry::new(String, String, Int, Int, cash? : Bool) -> Self
+
+pub struct LineItem {
+  line : String
+  amount : Int
+  entries : Int
+} derive(Eq, @debug.Debug)
+
+pub struct Report {
+  kind : StatementKind
+  period : String
+  lines : Array[LineItem]
+  total : Int
+} derive(Eq, @debug.Debug)
+pub fn Report::line(Self, String) -> Int?
+pub fn Report::to_csv(Self) -> String
+pub fn Report::to_json(Self) -> String
+pub fn Report::to_markdown(Self) -> String
+
+pub(all) enum StatementKind {
+  BalanceSheet
+  IncomeStatement
+  CashFlowStatement
+  Management
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+pub type Amount = Int
+
+// Traits
+
