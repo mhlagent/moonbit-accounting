@@ -6,11 +6,111 @@ import {
 }
 
 // Values
+pub fn analyze_ratios(Int, Int, Int, Int, Int, Int, Int, Int) -> RatioSet
+
+pub fn benchmark_fixture(Int) -> (Array[Entry], Array[AccountMapping])
+
+pub fn benchmark_summary(BenchmarkResult) -> String
+
+pub fn budget_variance(Array[BudgetLine], Array[BudgetLine]) -> Array[BudgetVariance]
+
+pub fn cash_flow(String, Array[Entry], Array[CashFlowRule]) -> Array[CashFlowLine]
+
+pub fn compare_period(String, String) -> Int
+
+pub fn compare_reports(StatementKind, String, String, Array[Entry], Array[AccountMapping]) -> ReportComparison
+
+pub fn compound_change(Int, Int, Int) -> Int?
+
+pub fn consolidate(String, Array[Entity], Array[AccountMapping]) -> Report
+
+pub fn convert_minor(Int, Currency, Currency, Int, Int) -> Int?
+
+pub fn currency(String) -> Currency?
+
+pub fn currency_codes() -> Array[String]
+
+pub fn detect_invalid_periods(Array[Entry]) -> Array[Anomaly]
+
+pub fn detect_large_entries(Array[Entry], Int) -> Array[Anomaly]
+
+pub fn detect_unmapped(Array[Entry], Array[AccountMapping]) -> Array[Anomaly]
+
+pub fn escape_html(String) -> String
+
+pub fn extended_chart() -> Array[AccountDefinition]
+
+pub fn extended_chart_for_class(AccountClass) -> Array[AccountDefinition]
+
+pub fn find_extended_account(String) -> AccountDefinition?
+
 pub fn generate(StatementKind, String, Array[Entry], Array[AccountMapping], comparison? : String) -> Report
+
+pub fn generate_by_dimension(StatementKind, String, Array[Entry], Array[AccountMapping]) -> Array[DimensionLine]
+
+pub fn generate_many(StatementKind, Array[String], Array[Entry], Array[AccountMapping]) -> Array[Report]
+
+pub fn health_score(RatioSet) -> HealthScore
+
+pub fn latest_report(Array[Report]) -> Report?
+
+pub fn lowest_report(Array[Report]) -> Report?
+
+pub fn moving_average(Array[Int], Int) -> Array[Int]
+
+pub fn period_delta(Array[Report]) -> Array[Int]
+
+pub fn period_totals(Array[Report]) -> Array[(String, Int)]
+
+pub fn regional_chart() -> Array[AccountDefinition]
+
+pub fn regional_chart_for_region(String) -> Array[AccountDefinition]
+
+pub fn regional_chart_size() -> Int
+
+pub fn render_variances(Array[Variance]) -> String
+
+pub fn report_document(Report, String) -> String
+
+pub fn report_variances(Report, Report) -> Array[Variance]
+
+pub fn run_benchmark(Int) -> BenchmarkResult
+
+pub fn safe_ratio(Int, Int) -> Int?
+
+pub fn standard_account(String) -> AccountDefinition?
+
+pub fn standard_chart() -> Array[AccountDefinition]
+
+pub fn trend_points(Array[(String, Int)]) -> Array[TrendPoint]
+
+pub fn validate_batch(Array[Entry]) -> BatchValidation
+
+pub fn validate_mappings(Array[AccountMapping]) -> MappingValidation
+
+pub fn validate_period(String) -> PeriodResult
+
+pub fn variance(String, Int, Int) -> Variance
 
 // Errors
 
 // Types and methods
+pub enum AccountClass {
+  Asset
+  Liability
+  Equity
+  Revenue
+  Expense
+} derive(Eq, @debug.Debug)
+
+pub struct AccountDefinition {
+  code : String
+  name : String
+  class : AccountClass
+  normal_debit : Bool
+} derive(Eq, @debug.Debug)
+pub fn AccountDefinition::new(String, String, AccountClass, Bool) -> Self
+
 pub struct AccountMapping {
   account : String
   line : String
@@ -19,19 +119,130 @@ pub struct AccountMapping {
 } derive(Eq, @debug.Debug)
 pub fn AccountMapping::new(String, String, StatementKind, factor? : Int) -> Self
 
+pub struct Anomaly {
+  kind : AnomalyKind
+  account : String
+  period : String
+  amount : Int
+  detail : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum AnomalyKind {
+  LargeDebit
+  LargeCredit
+  UnmappedAccount
+  InvalidPeriod
+  DuplicateEntry
+} derive(Eq, @debug.Debug)
+
+pub enum BatchValidation {
+  BalancedBatch
+  UnbalancedBatch(Int)
+  EmptyBatch
+} derive(Eq, @debug.Debug)
+
+pub struct BenchmarkResult {
+  entries : Int
+  mappings : Int
+  lines : Int
+  total : Int
+  elapsed_ms : Int
+} derive(Eq, @debug.Debug)
+
+pub struct BudgetLine {
+  line : String
+  amount : Int
+} derive(Eq, @debug.Debug)
+pub fn BudgetLine::new(String, Int) -> Self
+
+pub struct BudgetVariance {
+  line : String
+  budget : Int
+  actual : Int
+  variance : Int
+  favorable : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) enum CashFlowKind {
+  Operating
+  Investing
+  Financing
+  Unclassified
+} derive(Eq, @debug.Debug)
+
+pub struct CashFlowLine {
+  kind : CashFlowKind
+  amount : Int
+  entries : Int
+} derive(Eq, @debug.Debug)
+
+pub struct CashFlowRule {
+  account : String
+  kind : CashFlowKind
+  factor : Int
+} derive(Eq, @debug.Debug)
+pub fn CashFlowRule::new(String, CashFlowKind, factor? : Int) -> Self
+
+pub struct Currency {
+  code : String
+  name : String
+  minor_units : Int
+} derive(Eq, @debug.Debug)
+pub fn Currency::new(String, String, Int) -> Self
+
+pub struct DimensionLine {
+  dimension : String
+  amount : Int
+  entries : Int
+} derive(Eq, @debug.Debug)
+
+pub struct Entity {
+  name : String
+  entries : Array[Entry]
+} derive(Eq, @debug.Debug)
+pub fn Entity::new(String, Array[Entry]) -> Self
+
 pub struct Entry {
   account : String
   period : String
   debit : Int
   credit : Int
   cash : Bool
+  dimension : String
 } derive(Eq, @debug.Debug)
 pub fn Entry::new(String, String, Int, Int, cash? : Bool) -> Self
+pub fn Entry::new_with_dimension(String, String, Int, Int, String, cash? : Bool) -> Self
+
+pub struct HealthScore {
+  liquidity : Int
+  profitability : Int
+  leverage : Int
+  overall : Int
+} derive(Eq, @debug.Debug)
 
 pub struct LineItem {
   line : String
   amount : Int
   entries : Int
+} derive(Eq, @debug.Debug)
+
+pub enum MappingValidation {
+  ValidMappings
+  DuplicateAccount(String)
+} derive(Eq, @debug.Debug)
+
+pub enum PeriodResult {
+  ValidPeriod(String)
+  InvalidPeriod(String)
+} derive(Eq, @debug.Debug)
+
+pub struct RatioSet {
+  current_ratio : Int?
+  quick_ratio : Int?
+  gross_margin : Int?
+  operating_margin : Int?
+  debt_ratio : Int?
+  return_on_assets : Int?
 } derive(Eq, @debug.Debug)
 
 pub struct Report {
@@ -42,8 +253,15 @@ pub struct Report {
 } derive(Eq, @debug.Debug)
 pub fn Report::line(Self, String) -> Int?
 pub fn Report::to_csv(Self) -> String
+pub fn Report::to_html(Self) -> String
 pub fn Report::to_json(Self) -> String
 pub fn Report::to_markdown(Self) -> String
+
+pub struct ReportComparison {
+  current : Report
+  prior : Report
+  total_variance : Int
+} derive(Eq, @debug.Debug)
 
 pub(all) enum StatementKind {
   BalanceSheet
@@ -52,8 +270,22 @@ pub(all) enum StatementKind {
   Management
 } derive(Eq, @debug.Debug)
 
+pub struct TrendPoint {
+  period : String
+  amount : Int
+  change : Int
+  direction : String
+} derive(Eq, @debug.Debug)
+
+pub struct Variance {
+  line : String
+  current : Int
+  prior : Int
+  absolute : Int
+  percent : Int?
+} derive(Eq, @debug.Debug)
+
 // Type aliases
 pub type Amount = Int
 
 // Traits
-

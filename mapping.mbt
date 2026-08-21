@@ -16,7 +16,19 @@ pub fn Entry::new(
   credit : Amount,
   cash? : Bool = false,
 ) -> Entry {
-  { account, period, debit, credit, cash }
+  { account, period, debit, credit, cash, dimension: "" }
+}
+
+///|
+pub fn Entry::new_with_dimension(
+  account : String,
+  period : String,
+  debit : Amount,
+  credit : Amount,
+  dimension : String,
+  cash? : Bool = false,
+) -> Entry {
+  { account, period, debit, credit, cash, dimension }
 }
 
 ///|

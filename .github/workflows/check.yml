@@ -13,6 +13,7 @@ jobs:
     name: MoonBit ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
@@ -39,11 +40,33 @@ jobs:
         run: moon check --target all --deny-warn
       - name: Tests
         run: moon test --target all
+      - name: Native tests
+        run: moon test --target native --deny-warn
       - name: Format and public API check
         shell: bash
         run: |
-          moon fmt --warn
+          moon fmt --check
           git diff --exit-code
           moon info --target all
           git diff --exit-code
 
+  coverage:
+    name: Coverage summary
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install latest stable MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Update dependencies
+        run: moon update
+      - name: Test with coverage
+        run: |
+          moon test --target native --deny-warn --enable-coverage
+          moon coverage report -f summary
+          moon coverage analyze

@@ -17,6 +17,7 @@ pub struct Entry {
   debit : Amount
   credit : Amount
   cash : Bool
+  dimension : String
 } derive(Debug, Eq)
 
 ///|

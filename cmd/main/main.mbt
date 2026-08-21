@@ -23,4 +23,6 @@ fn main {
     mappings,
   )
   println(report.to_markdown())
+  let benchmark = @moonbit_accounting.run_benchmark(10000)
+  println(@moonbit_accounting.benchmark_summary(benchmark))
 }
