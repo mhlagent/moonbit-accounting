@@ -13,7 +13,7 @@ moon run cmd/main --target native
 Observed benchmark line on 2026-08-21:
 
 ```text
-entries=10000 mappings=10000 lines=16 total=489604 elapsed_ms=270
+entries=10000 mappings=10000 lines=16 total=489604 elapsed_ms=220
 ```
 
 The fixture creates 10,000 normalized entries and mappings, aggregates them
