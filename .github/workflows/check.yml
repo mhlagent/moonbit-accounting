@@ -42,6 +42,8 @@ jobs:
         run: moon test --target all
       - name: Native tests
         run: moon test --target native --deny-warn
+      - name: CLI smoke test
+        run: moon run cmd/main --target native
       - name: Format and public API check
         shell: bash
         run: |
