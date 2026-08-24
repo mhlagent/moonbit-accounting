@@ -22,7 +22,7 @@ pub fn build_report_pack(
 
 ///|
 pub fn ReportPack::to_markdown(self : ReportPack) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   out.write_string("# Financial report pack — ")
   out.write_string(self.period)
   out.write_string("\n\n")

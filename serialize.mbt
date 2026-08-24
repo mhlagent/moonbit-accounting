@@ -19,7 +19,7 @@ fn escape_csv(value : String) -> String {
 
 ///|
 fn escape_json(value : String) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   for c in value {
     match c {
       '"' => out.write_string("\\\"")
@@ -35,7 +35,7 @@ fn escape_json(value : String) -> String {
 
 ///|
 pub fn Report::to_csv(self : Report) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   out.write_string("statement,period,line,amount,entries\n")
   for item in self.lines {
     out.write_string(escape_csv(statement_name(self.kind)))
@@ -84,7 +84,7 @@ pub fn Report::to_json(self : Report) -> String {
 
 ///|
 pub fn Report::to_markdown(self : Report) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   out.write_string("| Line | Amount | Entries |\n| --- | ---: | ---: |\n")
   for item in self.lines {
     out.write_string(

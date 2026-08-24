@@ -1,7 +1,7 @@
 ///|
 /// Escape text for HTML contexts without relying on a runtime or DOM.
 pub fn escape_html(value : String) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   for c in value {
     match c {
       '&' => out.write_string("&amp;")
@@ -17,7 +17,7 @@ pub fn escape_html(value : String) -> String {
 
 ///|
 pub fn Report::to_html(self : Report) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   out.write_string("<table class=\"financial-report\"><caption>")
   out.write_string(escape_html(statement_name(self.kind)))
   out.write_string(" — ")
@@ -51,7 +51,7 @@ pub fn report_document(report : Report, title : String) -> String {
 
 ///|
 pub fn render_variances(variances : Array[Variance]) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   out.write_string(
     "| Line | Current | Prior | Variance | Percent |\n| --- | ---: | ---: | ---: | ---: |\n",
   )
