@@ -48,9 +48,8 @@ test "safe ratios return none for zero denominators" {
 }
 
 ///|
-test "catalogs provide stable mappings for large installations" {
-  assert_eq(extended_chart().length(), 6000)
-  assert_eq(regional_chart_size(), 5000)
-  assert_true(find_extended_account("100000") is Some(_))
-  assert_true(regional_chart_for_region("APAC").length() > 0)
+test "curated catalog provides stable mappings for importers" {
+  assert_eq(standard_chart().length(), 21)
+  assert_true(standard_account("1000") is Some(_))
+  assert_true(standard_account("9999") is None)
 }

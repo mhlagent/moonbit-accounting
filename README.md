@@ -10,9 +10,12 @@ owning a ledger, database, importer, or network service.
 - Balance sheet, income statement, cash-flow, management, comparison, and
   dimensional reports.
 - Batch and period validation, budget variance, consolidation, safe ratios,
-  trends, anomaly detection, and multi-currency scaling.
+  trends, anomaly detection, tax summaries, receivables aging, and
+  multi-currency scaling.
 - Deterministic CSV, JSON, Markdown, HTML, and CLI-friendly summaries.
-- Standard and regional account directories for import applications.
+- A curated standard account directory for import applications.
+- CSV entry import, journal validation, trial balances, cash reconciliation,
+  transparent forecasts, and report packs.
 
 ## Quick start
 
@@ -50,14 +53,8 @@ renderers are separated into focused MoonBit files. The CLI is only an adapter.
 ## Benchmark
 
 The deterministic fixture reports input size, mapping count, output line count,
-total, and measured runtime. Run `moon run cmd/main` for fresh output. Count
-compiled source with:
-
-```powershell
-(rg -n '' -g '*.mbt' | Measure-Object).Count
-```
-
-Numbers in project claims should come from these commands, not estimates.
+total, and measured runtime. Run `moon run cmd/main` for fresh output. The
+recorded run is documented in [docs/benchmark.md](docs/benchmark.md).
 
 ## Testing and CI
 

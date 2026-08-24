@@ -39,7 +39,7 @@ jobs:
       - name: Strict type check
         run: moon check --target all --deny-warn
       - name: Tests
-        run: moon test --target all
+        run: moon test --target all --deny-warn
       - name: Native tests
         run: moon test --target native --deny-warn
       - name: CLI smoke test

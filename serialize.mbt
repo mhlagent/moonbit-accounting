@@ -18,6 +18,22 @@ fn escape_csv(value : String) -> String {
 }
 
 ///|
+fn escape_json(value : String) -> String {
+  let out = StringBuilder::new()
+  for c in value {
+    match c {
+      '"' => out.write_string("\\\"")
+      '\\' => out.write_string("\\\\")
+      '\n' => out.write_string("\\n")
+      '\r' => out.write_string("\\r")
+      '\t' => out.write_string("\\t")
+      _ => out.write_string(c.to_string())
+    }
+  }
+  out.to_string()
+}
+
+///|
 pub fn Report::to_csv(self : Report) -> String {
   let out = StringBuilder::new()
   out.write_string("statement,period,line,amount,entries\n")
@@ -47,7 +63,7 @@ pub fn Report::to_json(self : Report) -> String {
   for item in self.lines {
     parts.push(
       "{\"line\":\"" +
-      item.line.replace(old="\"", new="\\\"") +
+      escape_json(item.line) +
       "\",\"amount\":" +
       item.amount.to_string() +
       ",\"entries\":" +
@@ -56,9 +72,9 @@ pub fn Report::to_json(self : Report) -> String {
     )
   }
   "{\"statement\":\"" +
-  statement_name(self.kind) +
+  escape_json(statement_name(self.kind)) +
   "\",\"period\":\"" +
-  self.period +
+  escape_json(self.period) +
   "\",\"total\":" +
   self.total.to_string() +
   ",\"lines\":[" +

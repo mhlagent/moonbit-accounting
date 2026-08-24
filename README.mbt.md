@@ -17,7 +17,8 @@ test "readme example" {
 Amounts are integer minor units. Reports can be rendered as CSV, JSON,
 Markdown, or HTML. Validation, comparison periods, dimensions, budgets,
 consolidation, ratios, trends, anomaly detection, and account catalogues are
-available from the same dependency-free package.
+available from the same dependency-free package, together with CSV import,
+journal validation, trial balances, reconciliation, and report packs.
 
 ```bash
 moon check --target all --deny-warn
