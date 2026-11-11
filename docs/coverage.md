@@ -10,8 +10,8 @@ moon coverage report -f summary
 Result:
 
 ```text
-Total: 727/752 (96.7%)
-Tests: 55 passed
+Total: 738/752 (98.1%)
+Tests: 59 passed
 ```
 
 Remaining uncovered lines are mostly the CLI adapter (`cmd/main`), defensive

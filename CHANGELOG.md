@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.3
+
+- Expanded tests to 59.
+- Raised native coverage to 738/752 (98.1%).
+- Added edge coverage for repeated cash-flow categories, dimension filtering/merging, JSON control characters, and malformed CSV amounts.
+- Fixed CSV escaping for fields containing multiple double quotes.
+
 ## 0.3.2
 
 - Expanded tests from 26 to 55.

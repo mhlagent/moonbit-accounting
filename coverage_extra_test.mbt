@@ -290,3 +290,67 @@ test "consolidation negative and missing mapping branches" {
   )
   assert_true(missing_mapping.total != 0)
 }
+
+///|
+test "cashflow merges repeated categories" {
+  let rules = [CashFlowRule::new("sales", Operating)]
+  let entries = [
+    Entry::new("sales", "2026-Q2", 0, 100, cash=true),
+    Entry::new("sales", "2026-Q2", 0, 50, cash=true),
+  ]
+  let lines = cash_flow("2026-Q2", entries, rules)
+  assert_eq(lines.length(), 1)
+  assert_eq(lines[0].amount, -150)
+  assert_eq(lines[0].entries, 2)
+}
+
+///|
+test "dimension filters and merges" {
+  let mappings = [
+    AccountMapping::new("sales", "Revenue", IncomeStatement),
+    AccountMapping::new("cash", "Cash", BalanceSheet),
+  ]
+  let entries = [
+    Entry::new_with_dimension("sales", "2026-Q2", 0, 100, "north"),
+    Entry::new_with_dimension("sales", "2026-Q2", 0, 50, "north"),
+    Entry::new_with_dimension("cash", "2026-Q2", 100, 0, "north"),
+  ]
+  let lines = generate_by_dimension(
+    IncomeStatement,
+    "2026-Q2",
+    entries,
+    mappings,
+  )
+  assert_eq(lines.length(), 1)
+  assert_eq(lines[0].amount, 150)
+  assert_eq(lines[0].entries, 2)
+}
+
+///|
+test "json escapes newline and csv rejects lone minus" {
+  let mappings = [AccountMapping::new("sales", "A\nB", IncomeStatement)]
+  let report = generate(
+    IncomeStatement,
+    "2026-Q2",
+    [Entry::new("sales", "2026-Q2", 0, 120)],
+    mappings,
+  )
+  assert_true(report.to_json().contains("A\\nB"))
+  let csv = "account,period,debit,credit,cash,dimension\n" +
+    "cash,2026-Q2,-,0,true,\n"
+  let imported = import_entries_csv(csv)
+  assert_eq(imported.entries.length(), 0)
+  assert_eq(imported.errors.length(), 1)
+}
+
+///|
+test "json escapes carriage return and tab" {
+  let mappings = [AccountMapping::new("sales", "A\r\tB", IncomeStatement)]
+  let report = generate(
+    IncomeStatement,
+    "2026-Q2",
+    [Entry::new("sales", "2026-Q2", 0, 120)],
+    mappings,
+  )
+  assert_true(report.to_json().contains("A\\r\\tB"))
+}
