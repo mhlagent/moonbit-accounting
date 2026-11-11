@@ -1,10 +1,11 @@
 ///|
 /// Forecasts are intentionally transparent run-rate projections.
+#derive(Debug, Eq)
 pub struct ForecastPoint {
   period : Int32
   amount : Amount
   source_average : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ForecastPoint with Eq::{not_equal, equal}

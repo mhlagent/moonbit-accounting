@@ -1,12 +1,13 @@
 ///|
 /// Deterministic fixture generation keeps benchmark comparisons meaningful.
+#derive(Debug, Eq)
 pub struct BenchmarkResult {
   entries : Int32
   mappings : Int32
   lines : Int32
   total : Amount
   elapsed_ms : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend BenchmarkResult with Eq::{not_equal, equal}

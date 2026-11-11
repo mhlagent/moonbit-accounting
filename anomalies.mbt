@@ -1,11 +1,12 @@
 ///|
+#derive(Debug, Eq)
 pub(all) enum AnomalyKind {
   LargeDebit
   LargeCredit
   UnmappedAccount
   InvalidPeriod
   DuplicateEntry
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend AnomalyKind with Eq::{not_equal, equal}
@@ -14,13 +15,14 @@ pub extend AnomalyKind with Eq::{not_equal, equal}
 pub extend AnomalyKind with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct Anomaly {
   kind : AnomalyKind
   account : String
   period : String
   amount : Amount
   detail : String
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Anomaly with Eq::{not_equal, equal}

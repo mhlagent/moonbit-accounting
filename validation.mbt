@@ -1,9 +1,10 @@
 ///|
+#derive(Debug, Eq)
 pub enum BatchValidation {
   BalancedBatch
   UnbalancedBatch(Amount)
   EmptyBatch
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend BatchValidation with Eq::{not_equal, equal}
@@ -12,10 +13,11 @@ pub extend BatchValidation with Eq::{not_equal, equal}
 pub extend BatchValidation with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub enum MappingValidation {
   ValidMappings
   DuplicateAccount(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend MappingValidation with Eq::{not_equal, equal}

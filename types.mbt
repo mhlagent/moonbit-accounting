@@ -3,12 +3,13 @@
 pub type Amount = Int32
 
 ///|
+#derive(Debug, Eq)
 pub(all) enum StatementKind {
   BalanceSheet
   IncomeStatement
   CashFlowStatement
   Management
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend StatementKind with Eq::{not_equal, equal}
@@ -17,6 +18,9 @@ pub extend StatementKind with Eq::{not_equal, equal}
 pub extend StatementKind with @debug.Debug::{to_repr}
 
 ///|
+
+///|
+#derive(Debug, Eq)
 pub struct Entry {
   account : String
   period : String
@@ -24,7 +28,7 @@ pub struct Entry {
   credit : Amount
   cash : Bool
   dimension : String
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Entry with Eq::{not_equal, equal}
@@ -33,12 +37,13 @@ pub extend Entry with Eq::{not_equal, equal}
 pub extend Entry with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct AccountMapping {
   account : String
   line : String
   kind : StatementKind
   factor : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend AccountMapping with Eq::{not_equal, equal}
@@ -47,11 +52,12 @@ pub extend AccountMapping with Eq::{not_equal, equal}
 pub extend AccountMapping with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct LineItem {
   line : String
   amount : Amount
   entries : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend LineItem with Eq::{not_equal, equal}
@@ -60,12 +66,13 @@ pub extend LineItem with Eq::{not_equal, equal}
 pub extend LineItem with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct Report {
   kind : StatementKind
   period : String
   lines : Array[LineItem]
   total : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Report with Eq::{not_equal, equal}

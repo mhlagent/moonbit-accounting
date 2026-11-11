@@ -1,12 +1,13 @@
 ///|
 /// Validation errors are explicit so importers can reject bad source data.
+#derive(Debug, Eq)
 pub enum EntryValidation {
   ValidEntry
   EmptyAccount
   InvalidEntryPeriod(String)
   NegativeAmount
   UnbalancedEntry
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend EntryValidation with Eq::{not_equal, equal}
@@ -34,12 +35,13 @@ pub fn validate_entry(entry : Entry) -> EntryValidation {
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct TrialBalanceLine {
   account : String
   debit : Amount
   credit : Amount
   balance : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TrialBalanceLine with Eq::{not_equal, equal}
@@ -48,12 +50,13 @@ pub extend TrialBalanceLine with Eq::{not_equal, equal}
 pub extend TrialBalanceLine with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct TrialBalance {
   lines : Array[TrialBalanceLine]
   total_debit : Amount
   total_credit : Amount
   balanced : Bool
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TrialBalance with Eq::{not_equal, equal}

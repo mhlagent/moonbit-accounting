@@ -1,10 +1,11 @@
 ///|
 /// Tax rules express how normalized accounts contribute to a tax base.
+#derive(Debug, Eq)
 pub(all) enum TaxTreatment {
   TaxableRevenue
   DeductibleExpense
   Exempt
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TaxTreatment with Eq::{not_equal, equal}
@@ -13,10 +14,11 @@ pub extend TaxTreatment with Eq::{not_equal, equal}
 pub extend TaxTreatment with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct TaxRule {
   account : String
   treatment : TaxTreatment
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TaxRule with Eq::{not_equal, equal}
@@ -30,6 +32,7 @@ pub fn TaxRule::new(account : String, treatment : TaxTreatment) -> TaxRule {
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct TaxSummary {
   period : String
   revenue : Amount
@@ -37,7 +40,7 @@ pub struct TaxSummary {
   base : Amount
   rate : Int32
   tax : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TaxSummary with Eq::{not_equal, equal}

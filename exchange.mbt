@@ -1,11 +1,12 @@
 ///|
 /// Explicit exchange rates keep conversion policy outside report generation.
+#derive(Debug, Eq)
 pub struct ExchangeRate {
   from : String
   to : String
   numerator : Int32
   denominator : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ExchangeRate with Eq::{not_equal, equal}

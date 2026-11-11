@@ -1,10 +1,11 @@
 ///|
 /// Journal entries preserve source-document boundaries before normalization.
+#derive(Debug, Eq)
 pub struct JournalLine {
   account : String
   debit : Amount
   credit : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend JournalLine with Eq::{not_equal, equal}
@@ -22,12 +23,13 @@ pub fn JournalLine::new(
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct JournalEntry {
   id : String
   period : String
   description : String
   lines : Array[JournalLine]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend JournalEntry with Eq::{not_equal, equal}
@@ -50,13 +52,14 @@ pub fn JournalEntry::add_line(self : JournalEntry, line : JournalLine) -> Unit {
 }
 
 ///|
+#derive(Debug, Eq)
 pub enum JournalValidation {
   BalancedJournal
   EmptyJournal
   InvalidJournalPeriod
   UnbalancedJournal(Amount)
   InvalidJournalLine(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend JournalValidation with Eq::{not_equal, equal}

@@ -1,10 +1,11 @@
 ///|
 /// Receivable aging uses quarter periods and integer minor units.
+#derive(Debug, Eq)
 pub struct AgingBucket {
   label : String
   amount : Amount
   entries : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend AgingBucket with Eq::{not_equal, equal}

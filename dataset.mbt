@@ -1,10 +1,11 @@
 ///|
 /// Dataset validation combines structural and mapping checks for importers.
+#derive(Debug, Eq)
 pub enum DatasetIssue {
   InvalidEntry(Int32, EntryValidation)
   UnmappedEntry(Int32, String)
   DuplicateEntry(Int32, Int32)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DatasetIssue with Eq::{not_equal, equal}

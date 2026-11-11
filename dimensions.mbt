@@ -1,9 +1,10 @@
 ///|
+#derive(Debug, Eq)
 pub struct DimensionLine {
   dimension : String
   amount : Amount
   entries : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DimensionLine with Eq::{not_equal, equal}
@@ -57,11 +58,12 @@ pub fn generate_by_dimension(
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct ReportComparison {
   current : Report
   prior : Report
   total_variance : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ReportComparison with Eq::{not_equal, equal}

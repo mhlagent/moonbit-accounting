@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 pub enum PeriodResult {
   ValidPeriod(String)
   InvalidPeriod(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend PeriodResult with Eq::{not_equal, equal}

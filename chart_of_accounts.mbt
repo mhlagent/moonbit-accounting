@@ -1,12 +1,13 @@
 ///|
 /// A compact standard chart helps applications bootstrap mappings.
+#derive(Debug, Eq)
 pub enum AccountClass {
   Asset
   Liability
   Equity
   Revenue
   Expense
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend AccountClass with Eq::{not_equal, equal}
@@ -15,12 +16,13 @@ pub extend AccountClass with Eq::{not_equal, equal}
 pub extend AccountClass with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct AccountDefinition {
   code : String
   name : String
   class : AccountClass
   normal_debit : Bool
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend AccountDefinition with Eq::{not_equal, equal}

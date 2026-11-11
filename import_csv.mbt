@@ -1,9 +1,10 @@
 ///|
 /// A small dependency-free importer for normalized CSV exchange files.
+#derive(Debug, Eq)
 pub struct CsvImportResult {
   entries : Array[Entry]
   errors : Array[String]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend CsvImportResult with Eq::{not_equal, equal}

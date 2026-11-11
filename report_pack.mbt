@@ -1,9 +1,10 @@
 ///|
 /// A report pack groups the statements normally shown together.
+#derive(Debug, Eq)
 pub struct ReportPack {
   period : String
   reports : Array[Report]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ReportPack with Eq::{not_equal, equal}

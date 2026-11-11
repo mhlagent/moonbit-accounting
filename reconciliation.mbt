@@ -1,9 +1,10 @@
 ///|
 /// Reconciliation compares normalized balances with an external statement.
+#derive(Debug, Eq)
 pub struct CashRecord {
   reference : String
   amount : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend CashRecord with Eq::{not_equal, equal}
@@ -17,6 +18,7 @@ pub fn CashRecord::new(reference : String, amount : Amount) -> CashRecord {
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct ReconciliationResult {
   matched : Int32
   outstanding_ledger : Int32
@@ -24,7 +26,7 @@ pub struct ReconciliationResult {
   ledger_total : Amount
   statement_total : Amount
   difference : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ReconciliationResult with Eq::{not_equal, equal}

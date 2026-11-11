@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 pub struct Entity {
   name : String
   entries : Array[Entry]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Entity with Eq::{not_equal, equal}
@@ -17,10 +18,11 @@ pub fn Entity::new(name : String, entries : Array[Entry]) -> Entity {
 
 ///|
 /// A rule identifies reciprocal intercompany balances to remove.
+#derive(Debug, Eq)
 pub struct EliminationRule {
   debit_account : String
   credit_account : String
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend EliminationRule with Eq::{not_equal, equal}

@@ -1,10 +1,11 @@
 ///|
+#derive(Debug, Eq)
 pub struct TrendPoint {
   period : String
   amount : Amount
   change : Amount
   direction : String
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TrendPoint with Eq::{not_equal, equal}

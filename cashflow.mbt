@@ -1,10 +1,11 @@
 ///|
+#derive(Debug, Eq)
 pub(all) enum CashFlowKind {
   Operating
   Investing
   Financing
   Unclassified
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend CashFlowKind with Eq::{not_equal, equal}
@@ -13,11 +14,12 @@ pub extend CashFlowKind with Eq::{not_equal, equal}
 pub extend CashFlowKind with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub struct CashFlowRule {
   account : String
   kind : CashFlowKind
   factor : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend CashFlowRule with Eq::{not_equal, equal}
@@ -35,11 +37,12 @@ pub fn CashFlowRule::new(
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct CashFlowLine {
   kind : CashFlowKind
   amount : Amount
   entries : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend CashFlowLine with Eq::{not_equal, equal}

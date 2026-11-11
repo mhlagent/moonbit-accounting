@@ -1,5 +1,6 @@
 ///|
 /// Financial analysis primitives operate on integer minor units.
+#derive(Debug, Eq)
 pub struct RatioSet {
   current_ratio : Amount?
   quick_ratio : Amount?
@@ -7,7 +8,7 @@ pub struct RatioSet {
   operating_margin : Amount?
   debt_ratio : Amount?
   return_on_assets : Amount?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RatioSet with Eq::{not_equal, equal}
@@ -38,13 +39,14 @@ pub fn analyze_ratios(
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct Variance {
   line : String
   current : Amount
   prior : Amount
   absolute : Amount
   percent : Amount?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Variance with Eq::{not_equal, equal}
@@ -82,12 +84,13 @@ pub fn report_variances(current : Report, prior : Report) -> Array[Variance] {
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct HealthScore {
   liquidity : Amount
   profitability : Amount
   leverage : Amount
   overall : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend HealthScore with Eq::{not_equal, equal}

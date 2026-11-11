@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 pub struct BudgetLine {
   line : String
   amount : Amount
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend BudgetLine with Eq::{not_equal, equal}
@@ -16,13 +17,14 @@ pub fn BudgetLine::new(line : String, amount : Amount) -> BudgetLine {
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct BudgetVariance {
   line : String
   budget : Amount
   actual : Amount
   variance : Amount
   favorable : Bool
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend BudgetVariance with Eq::{not_equal, equal}

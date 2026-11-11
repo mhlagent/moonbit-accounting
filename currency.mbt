@@ -1,10 +1,11 @@
 ///|
 /// ISO-like currency metadata used by callers that need explicit scale.
+#derive(Debug, Eq)
 pub struct Currency {
   code : String
   name : String
   minor_units : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Currency with Eq::{not_equal, equal}

@@ -1,10 +1,11 @@
 ///|
 /// Deterministic scalar metrics for dashboards and reports.
+#derive(Debug, Eq)
 pub struct DimensionTotal {
   dimension : String
   amount : Amount
   entries : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DimensionTotal with Eq::{not_equal, equal}
