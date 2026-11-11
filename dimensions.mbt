@@ -2,8 +2,14 @@
 pub struct DimensionLine {
   dimension : String
   amount : Amount
-  entries : Int
+  entries : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend DimensionLine with Eq::{not_equal, equal}
+
+///|
+pub extend DimensionLine with @debug.Debug::{to_repr}
 
 ///|
 pub fn generate_by_dimension(
@@ -42,7 +48,7 @@ pub fn generate_by_dimension(
           }
         }
         if !found {
-          result.push({ dimension: key, amount: value, entries: 1 })
+          result.push({ dimension: key, amount: value, entries: 1, })
         }
       }
     }
@@ -58,6 +64,12 @@ pub struct ReportComparison {
 } derive(Debug, Eq)
 
 ///|
+pub extend ReportComparison with Eq::{not_equal, equal}
+
+///|
+pub extend ReportComparison with @debug.Debug::{to_repr}
+
+///|
 pub fn compare_reports(
   kind : StatementKind,
   current_period : String,
@@ -67,5 +79,5 @@ pub fn compare_reports(
 ) -> ReportComparison {
   let current = generate(kind, current_period, entries, mappings)
   let prior = generate(kind, prior_period, entries, mappings)
-  { current, prior, total_variance: current.total - prior.total }
+  { current, prior, total_variance: current.total - prior.total, }
 }

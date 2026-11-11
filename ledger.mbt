@@ -9,6 +9,12 @@ pub enum EntryValidation {
 } derive(Debug, Eq)
 
 ///|
+pub extend EntryValidation with Eq::{not_equal, equal}
+
+///|
+pub extend EntryValidation with @debug.Debug::{to_repr}
+
+///|
 pub fn validate_entry(entry : Entry) -> EntryValidation {
   if entry.account == "" {
     return EmptyAccount
@@ -36,6 +42,12 @@ pub struct TrialBalanceLine {
 } derive(Debug, Eq)
 
 ///|
+pub extend TrialBalanceLine with Eq::{not_equal, equal}
+
+///|
+pub extend TrialBalanceLine with @debug.Debug::{to_repr}
+
+///|
 pub struct TrialBalance {
   lines : Array[TrialBalanceLine]
   total_debit : Amount
@@ -44,9 +56,15 @@ pub struct TrialBalance {
 } derive(Debug, Eq)
 
 ///|
+pub extend TrialBalance with Eq::{not_equal, equal}
+
+///|
+pub extend TrialBalance with @debug.Debug::{to_repr}
+
+///|
 pub fn trial_balance(
   entries : Array[Entry],
-  period? : String = "",
+  period~ : String = "",
 ) -> TrialBalance {
   let lines : Array[TrialBalanceLine] = []
   let mut total_debit = 0
@@ -59,14 +77,14 @@ pub fn trial_balance(
     total_credit += entry.credit
     add_trial_line(lines, entry.account, entry.debit, entry.credit)
   }
-  { lines, total_debit, total_credit, balanced: total_debit == total_credit }
+  { lines, total_debit, total_credit, balanced: total_debit == total_credit, }
 }
 
 ///|
 pub fn account_balance(
   entries : Array[Entry],
   account : String,
-  period? : String = "",
+  period~ : String = "",
 ) -> Amount {
   let mut debit = 0
   let mut credit = 0
@@ -110,5 +128,5 @@ fn add_trial_line(
       return
     }
   }
-  lines.push({ account, debit, credit, balance: debit - credit })
+  lines.push({ account, debit, credit, balance: debit - credit, })
 }

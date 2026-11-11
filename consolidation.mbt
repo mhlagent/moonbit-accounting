@@ -5,8 +5,14 @@ pub struct Entity {
 } derive(Debug, Eq)
 
 ///|
+pub extend Entity with Eq::{not_equal, equal}
+
+///|
+pub extend Entity with @debug.Debug::{to_repr}
+
+///|
 pub fn Entity::new(name : String, entries : Array[Entry]) -> Entity {
-  { name, entries }
+  { name, entries, }
 }
 
 ///|
@@ -17,11 +23,17 @@ pub struct EliminationRule {
 } derive(Debug, Eq)
 
 ///|
+pub extend EliminationRule with Eq::{not_equal, equal}
+
+///|
+pub extend EliminationRule with @debug.Debug::{to_repr}
+
+///|
 pub fn EliminationRule::new(
   debit_account : String,
   credit_account : String,
 ) -> EliminationRule {
-  { debit_account, credit_account }
+  { debit_account, credit_account, }
 }
 
 ///|
@@ -78,7 +90,7 @@ pub fn consolidate_with_eliminations(
   for item in adjusted {
     total += item.amount
   }
-  { kind: BalanceSheet, period, lines: adjusted, total }
+  { kind: BalanceSheet, period, lines: adjusted, total, }
 }
 
 ///|
@@ -116,7 +128,7 @@ fn adjust_line(
     Some(mapping) =>
       for i, item in lines {
         if item.line == mapping.line {
-          lines[i] = { ..item, amount: item.amount + delta * mapping.factor }
+          lines[i] = { ..item, amount: item.amount + delta * mapping.factor, }
           return
         }
       }

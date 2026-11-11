@@ -8,6 +8,12 @@ pub(all) enum AnomalyKind {
 } derive(Debug, Eq)
 
 ///|
+pub extend AnomalyKind with Eq::{not_equal, equal}
+
+///|
+pub extend AnomalyKind with @debug.Debug::{to_repr}
+
+///|
 pub struct Anomaly {
   kind : AnomalyKind
   account : String
@@ -15,6 +21,12 @@ pub struct Anomaly {
   amount : Amount
   detail : String
 } derive(Debug, Eq)
+
+///|
+pub extend Anomaly with Eq::{not_equal, equal}
+
+///|
+pub extend Anomaly with @debug.Debug::{to_repr}
 
 ///|
 pub fn detect_large_entries(

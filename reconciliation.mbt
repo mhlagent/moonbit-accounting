@@ -6,19 +6,31 @@ pub struct CashRecord {
 } derive(Debug, Eq)
 
 ///|
+pub extend CashRecord with Eq::{not_equal, equal}
+
+///|
+pub extend CashRecord with @debug.Debug::{to_repr}
+
+///|
 pub fn CashRecord::new(reference : String, amount : Amount) -> CashRecord {
-  { reference, amount }
+  { reference, amount, }
 }
 
 ///|
 pub struct ReconciliationResult {
-  matched : Int
-  outstanding_ledger : Int
-  outstanding_statement : Int
+  matched : Int32
+  outstanding_ledger : Int32
+  outstanding_statement : Int32
   ledger_total : Amount
   statement_total : Amount
   difference : Amount
 } derive(Debug, Eq)
+
+///|
+pub extend ReconciliationResult with Eq::{not_equal, equal}
+
+///|
+pub extend ReconciliationResult with @debug.Debug::{to_repr}
 
 ///|
 pub fn reconcile_cash(

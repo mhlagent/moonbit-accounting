@@ -6,6 +6,12 @@ pub struct ReportPack {
 } derive(Debug, Eq)
 
 ///|
+pub extend ReportPack with Eq::{not_equal, equal}
+
+///|
+pub extend ReportPack with @debug.Debug::{to_repr}
+
+///|
 pub fn build_report_pack(
   period : String,
   entries : Array[Entry],
@@ -17,7 +23,7 @@ pub fn build_report_pack(
     generate(CashFlowStatement, period, entries, mappings),
     generate(Management, period, entries, mappings),
   ]
-  { period, reports }
+  { period, reports, }
 }
 
 ///|

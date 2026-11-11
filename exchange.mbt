@@ -3,18 +3,24 @@
 pub struct ExchangeRate {
   from : String
   to : String
-  numerator : Int
-  denominator : Int
+  numerator : Int32
+  denominator : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend ExchangeRate with Eq::{not_equal, equal}
+
+///|
+pub extend ExchangeRate with @debug.Debug::{to_repr}
 
 ///|
 pub fn ExchangeRate::new(
   from : String,
   to : String,
-  numerator : Int,
-  denominator : Int,
+  numerator : Int32,
+  denominator : Int32,
 ) -> ExchangeRate {
-  { from, to, numerator, denominator }
+  { from, to, numerator, denominator, }
 }
 
 ///|

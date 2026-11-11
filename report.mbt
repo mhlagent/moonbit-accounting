@@ -31,7 +31,7 @@ pub fn generate(
           }
         }
         if !found {
-          lines.push({ line: mapping.line, amount: value, entries: 1 })
+          lines.push({ line: mapping.line, amount: value, entries: 1, })
         }
       }
     }
@@ -40,7 +40,7 @@ pub fn generate(
   for item in lines {
     total += item.amount
   }
-  { kind, period, lines, total }
+  { kind, period, lines, total, }
 }
 
 ///|

@@ -7,27 +7,45 @@ pub(all) enum CashFlowKind {
 } derive(Debug, Eq)
 
 ///|
+pub extend CashFlowKind with Eq::{not_equal, equal}
+
+///|
+pub extend CashFlowKind with @debug.Debug::{to_repr}
+
+///|
 pub struct CashFlowRule {
   account : String
   kind : CashFlowKind
-  factor : Int
+  factor : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend CashFlowRule with Eq::{not_equal, equal}
+
+///|
+pub extend CashFlowRule with @debug.Debug::{to_repr}
 
 ///|
 pub fn CashFlowRule::new(
   account : String,
   kind : CashFlowKind,
-  factor? : Int = 1,
+  factor~ : Int32 = 1,
 ) -> CashFlowRule {
-  { account, kind, factor }
+  { account, kind, factor, }
 }
 
 ///|
 pub struct CashFlowLine {
   kind : CashFlowKind
   amount : Amount
-  entries : Int
+  entries : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend CashFlowLine with Eq::{not_equal, equal}
+
+///|
+pub extend CashFlowLine with @debug.Debug::{to_repr}
 
 ///|
 pub fn cash_flow(
@@ -84,5 +102,5 @@ fn add_cash_line(
       return
     }
   }
-  lines.push({ kind, amount, entries: 1 })
+  lines.push({ kind, amount, entries: 1, })
 }

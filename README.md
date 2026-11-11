@@ -56,6 +56,18 @@ The deterministic fixture reports input size, mapping count, output line count,
 total, and measured runtime. Run `moon run cmd/main` for fresh output. The
 recorded run is documented in [docs/benchmark.md](docs/benchmark.md).
 
+## Compatibility
+
+Verified on 2026-11-11 with:
+
+- `moon 0.1.20261016`
+- `moonc v0.10.16+b1a0e846e`
+- `moonrun 0.1.20261016`
+
+Targets checked by CI: `wasm`, `wasm-gc`, `js`, and `native`. The CLI smoke
+test runs on the native backend. The package continues to use the official
+MoonBit toolchain and has no external runtime dependencies.
+
 ## Testing and CI
 
 Tests cover malformed periods, unbalanced batches, duplicate mappings,

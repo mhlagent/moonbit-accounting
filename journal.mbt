@@ -7,12 +7,18 @@ pub struct JournalLine {
 } derive(Debug, Eq)
 
 ///|
+pub extend JournalLine with Eq::{not_equal, equal}
+
+///|
+pub extend JournalLine with @debug.Debug::{to_repr}
+
+///|
 pub fn JournalLine::new(
   account : String,
   debit : Amount,
   credit : Amount,
 ) -> JournalLine {
-  { account, debit, credit }
+  { account, debit, credit, }
 }
 
 ///|
@@ -24,12 +30,18 @@ pub struct JournalEntry {
 } derive(Debug, Eq)
 
 ///|
+pub extend JournalEntry with Eq::{not_equal, equal}
+
+///|
+pub extend JournalEntry with @debug.Debug::{to_repr}
+
+///|
 pub fn JournalEntry::new(
   id : String,
   period : String,
   description : String,
 ) -> JournalEntry {
-  { id, period, description, lines: [] }
+  { id, period, description, lines: [], }
 }
 
 ///|
@@ -45,6 +57,12 @@ pub enum JournalValidation {
   UnbalancedJournal(Amount)
   InvalidJournalLine(String)
 } derive(Debug, Eq)
+
+///|
+pub extend JournalValidation with Eq::{not_equal, equal}
+
+///|
+pub extend JournalValidation with @debug.Debug::{to_repr}
 
 ///|
 pub fn validate_journal(journal : JournalEntry) -> JournalValidation {

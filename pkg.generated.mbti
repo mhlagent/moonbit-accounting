@@ -6,13 +6,13 @@ import {
 }
 
 // Values
-pub fn account_balance(Array[Entry], String, period? : String) -> Int
+pub fn account_balance(Array[Entry], String, period? : String) -> Int32
 
 pub fn age_receivables(Array[Entry], String, String) -> Array[AgingBucket]
 
-pub fn analyze_ratios(Int, Int, Int, Int, Int, Int, Int, Int) -> RatioSet
+pub fn analyze_ratios(Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32) -> RatioSet
 
-pub fn benchmark_fixture(Int) -> (Array[Entry], Array[AccountMapping])
+pub fn benchmark_fixture(Int32) -> (Array[Entry], Array[AccountMapping])
 
 pub fn benchmark_summary(BenchmarkResult) -> String
 
@@ -20,27 +20,27 @@ pub fn budget_variance(Array[BudgetLine], Array[BudgetLine]) -> Array[BudgetVari
 
 pub fn build_report_pack(String, Array[Entry], Array[AccountMapping]) -> ReportPack
 
-pub fn burn_rate(Array[Int], Int) -> Int?
+pub fn burn_rate(Array[Int32], Int32) -> Int32?
 
 pub fn cash_flow(String, Array[Entry], Array[CashFlowRule]) -> Array[CashFlowLine]
 
-pub fn compare_period(String, String) -> Int
+pub fn compare_period(String, String) -> Int32
 
 pub fn compare_reports(StatementKind, String, String, Array[Entry], Array[AccountMapping]) -> ReportComparison
 
-pub fn compound_change(Int, Int, Int) -> Int?
+pub fn compound_change(Int32, Int32, Int32) -> Int32?
 
 pub fn consolidate(String, Array[Entity], Array[AccountMapping]) -> Report
 
 pub fn consolidate_with_eliminations(String, Array[Entity], Array[AccountMapping], Array[EliminationRule]) -> Report
 
-pub fn convert_amount(Int, Currency?, Currency?, ExchangeRate) -> Int?
+pub fn convert_amount(Int32, Currency?, Currency?, ExchangeRate) -> Int32?
 
 pub fn convert_entries(Array[Entry], Currency?, Currency?, ExchangeRate) -> Array[Entry]
 
 pub fn convert_entry(Entry, Currency?, Currency?, ExchangeRate) -> Entry?
 
-pub fn convert_minor(Int, Currency, Currency, Int, Int) -> Int?
+pub fn convert_minor(Int32, Currency, Currency, Int32, Int32) -> Int32?
 
 pub fn currency(String) -> Currency?
 
@@ -48,7 +48,7 @@ pub fn currency_codes() -> Array[String]
 
 pub fn detect_invalid_periods(Array[Entry]) -> Array[Anomaly]
 
-pub fn detect_large_entries(Array[Entry], Int) -> Array[Anomaly]
+pub fn detect_large_entries(Array[Entry], Int32) -> Array[Anomaly]
 
 pub fn detect_unmapped(Array[Entry], Array[AccountMapping]) -> Array[Anomaly]
 
@@ -60,11 +60,11 @@ pub fn find_trial_line(TrialBalance, String) -> TrialBalanceLine?
 
 pub fn flatten_journal(JournalEntry) -> Array[Entry]
 
-pub fn forecast_linear(Array[Int], Int) -> Array[ForecastPoint]
+pub fn forecast_linear(Array[Int32], Int32) -> Array[ForecastPoint]
 
-pub fn forecast_run_rate(Array[Int], Int) -> Array[ForecastPoint]
+pub fn forecast_run_rate(Array[Int32], Int32) -> Array[ForecastPoint]
 
-pub fn forecast_total(Array[ForecastPoint]) -> Int
+pub fn forecast_total(Array[ForecastPoint]) -> Int32
 
 pub fn generate(StatementKind, String, Array[Entry], Array[AccountMapping], comparison? : String) -> Report
 
@@ -74,27 +74,27 @@ pub fn generate_many(StatementKind, Array[String], Array[Entry], Array[AccountMa
 
 pub fn group_by_dimension(Array[Entry], String) -> Array[DimensionTotal]
 
-pub fn growth_percent(Int, Int) -> Int?
+pub fn growth_percent(Int32, Int32) -> Int32?
 
 pub fn health_score(RatioSet) -> HealthScore
 
 pub fn import_entries_csv(String) -> CsvImportResult
 
-pub fn journal_totals(JournalEntry) -> (Int, Int)
+pub fn journal_totals(JournalEntry) -> (Int32, Int32)
 
 pub fn latest_report(Array[Report]) -> Report?
 
 pub fn lowest_report(Array[Report]) -> Report?
 
-pub fn moving_average(Array[Int], Int) -> Array[Int]
+pub fn moving_average(Array[Int32], Int32) -> Array[Int32]
 
-pub fn net_margin(Int, Int) -> Int?
+pub fn net_margin(Int32, Int32) -> Int32?
 
-pub fn period_delta(Array[Report]) -> Array[Int]
+pub fn period_delta(Array[Report]) -> Array[Int32]
 
-pub fn period_distance(String, String) -> Int
+pub fn period_distance(String, String) -> Int32
 
-pub fn period_totals(Array[Report]) -> Array[(String, Int)]
+pub fn period_totals(Array[Report]) -> Array[(String, Int32)]
 
 pub fn reconcile_cash(Array[CashRecord], Array[CashRecord]) -> ReconciliationResult
 
@@ -106,19 +106,19 @@ pub fn report_document(Report, String) -> String
 
 pub fn report_variances(Report, Report) -> Array[Variance]
 
-pub fn run_benchmark(Int) -> BenchmarkResult
+pub fn run_benchmark(Int32) -> BenchmarkResult
 
-pub fn safe_ratio(Int, Int) -> Int?
+pub fn safe_ratio(Int32, Int32) -> Int32?
 
 pub fn standard_account(String) -> AccountDefinition?
 
 pub fn standard_chart() -> Array[AccountDefinition]
 
-pub fn tax_amount(Int, Int) -> Int
+pub fn tax_amount(Int32, Int32) -> Int32
 
-pub fn tax_summary(Array[Entry], String, Array[TaxRule], rate~ : Int) -> TaxSummary
+pub fn tax_summary(Array[Entry], String, Array[TaxRule], rate~ : Int32) -> TaxSummary
 
-pub fn trend_points(Array[(String, Int)]) -> Array[TrendPoint]
+pub fn trend_points(Array[(String, Int32)]) -> Array[TrendPoint]
 
 pub fn trial_balance(Array[Entry], period? : String) -> TrialBalance
 
@@ -136,9 +136,9 @@ pub fn validate_mappings(Array[AccountMapping]) -> MappingValidation
 
 pub fn validate_period(String) -> PeriodResult
 
-pub fn variance(String, Int, Int) -> Variance
+pub fn variance(String, Int32, Int32) -> Variance
 
-pub fn weighted_average(Array[(Int, Int)]) -> Int?
+pub fn weighted_average(Array[(Int32, Int32)]) -> Int32?
 
 // Errors
 
@@ -150,6 +150,9 @@ pub enum AccountClass {
   Revenue
   Expense
 } derive(Eq, @debug.Debug)
+pub fn AccountClass::equal(Self, Self) -> Bool
+pub fn AccountClass::not_equal(Self, Self) -> Bool
+pub fn AccountClass::to_repr(Self) -> @debug.Repr
 
 pub struct AccountDefinition {
   code : String
@@ -157,29 +160,41 @@ pub struct AccountDefinition {
   class : AccountClass
   normal_debit : Bool
 } derive(Eq, @debug.Debug)
+pub fn AccountDefinition::equal(Self, Self) -> Bool
 pub fn AccountDefinition::new(String, String, AccountClass, Bool) -> Self
+pub fn AccountDefinition::not_equal(Self, Self) -> Bool
+pub fn AccountDefinition::to_repr(Self) -> @debug.Repr
 
 pub struct AccountMapping {
   account : String
   line : String
   kind : StatementKind
-  factor : Int
+  factor : Int32
 } derive(Eq, @debug.Debug)
-pub fn AccountMapping::new(String, String, StatementKind, factor? : Int) -> Self
+pub fn AccountMapping::equal(Self, Self) -> Bool
+pub fn AccountMapping::new(String, String, StatementKind, factor? : Int32) -> Self
+pub fn AccountMapping::not_equal(Self, Self) -> Bool
+pub fn AccountMapping::to_repr(Self) -> @debug.Repr
 
 pub struct AgingBucket {
   label : String
-  amount : Int
-  entries : Int
+  amount : Int32
+  entries : Int32
 } derive(Eq, @debug.Debug)
+pub fn AgingBucket::equal(Self, Self) -> Bool
+pub fn AgingBucket::not_equal(Self, Self) -> Bool
+pub fn AgingBucket::to_repr(Self) -> @debug.Repr
 
 pub struct Anomaly {
   kind : AnomalyKind
   account : String
   period : String
-  amount : Int
+  amount : Int32
   detail : String
 } derive(Eq, @debug.Debug)
+pub fn Anomaly::equal(Self, Self) -> Bool
+pub fn Anomaly::not_equal(Self, Self) -> Bool
+pub fn Anomaly::to_repr(Self) -> @debug.Repr
 
 pub(all) enum AnomalyKind {
   LargeDebit
@@ -188,34 +203,49 @@ pub(all) enum AnomalyKind {
   InvalidPeriod
   DuplicateEntry
 } derive(Eq, @debug.Debug)
+pub fn AnomalyKind::equal(Self, Self) -> Bool
+pub fn AnomalyKind::not_equal(Self, Self) -> Bool
+pub fn AnomalyKind::to_repr(Self) -> @debug.Repr
 
 pub enum BatchValidation {
   BalancedBatch
-  UnbalancedBatch(Int)
+  UnbalancedBatch(Int32)
   EmptyBatch
 } derive(Eq, @debug.Debug)
+pub fn BatchValidation::equal(Self, Self) -> Bool
+pub fn BatchValidation::not_equal(Self, Self) -> Bool
+pub fn BatchValidation::to_repr(Self) -> @debug.Repr
 
 pub struct BenchmarkResult {
-  entries : Int
-  mappings : Int
-  lines : Int
-  total : Int
-  elapsed_ms : Int
+  entries : Int32
+  mappings : Int32
+  lines : Int32
+  total : Int32
+  elapsed_ms : Int32
 } derive(Eq, @debug.Debug)
+pub fn BenchmarkResult::equal(Self, Self) -> Bool
+pub fn BenchmarkResult::not_equal(Self, Self) -> Bool
+pub fn BenchmarkResult::to_repr(Self) -> @debug.Repr
 
 pub struct BudgetLine {
   line : String
-  amount : Int
+  amount : Int32
 } derive(Eq, @debug.Debug)
-pub fn BudgetLine::new(String, Int) -> Self
+pub fn BudgetLine::equal(Self, Self) -> Bool
+pub fn BudgetLine::new(String, Int32) -> Self
+pub fn BudgetLine::not_equal(Self, Self) -> Bool
+pub fn BudgetLine::to_repr(Self) -> @debug.Repr
 
 pub struct BudgetVariance {
   line : String
-  budget : Int
-  actual : Int
-  variance : Int
+  budget : Int32
+  actual : Int32
+  variance : Int32
   favorable : Bool
 } derive(Eq, @debug.Debug)
+pub fn BudgetVariance::equal(Self, Self) -> Bool
+pub fn BudgetVariance::not_equal(Self, Self) -> Bool
+pub fn BudgetVariance::to_repr(Self) -> @debug.Repr
 
 pub(all) enum CashFlowKind {
   Operating
@@ -223,78 +253,114 @@ pub(all) enum CashFlowKind {
   Financing
   Unclassified
 } derive(Eq, @debug.Debug)
+pub fn CashFlowKind::equal(Self, Self) -> Bool
+pub fn CashFlowKind::not_equal(Self, Self) -> Bool
+pub fn CashFlowKind::to_repr(Self) -> @debug.Repr
 
 pub struct CashFlowLine {
   kind : CashFlowKind
-  amount : Int
-  entries : Int
+  amount : Int32
+  entries : Int32
 } derive(Eq, @debug.Debug)
+pub fn CashFlowLine::equal(Self, Self) -> Bool
+pub fn CashFlowLine::not_equal(Self, Self) -> Bool
+pub fn CashFlowLine::to_repr(Self) -> @debug.Repr
 
 pub struct CashFlowRule {
   account : String
   kind : CashFlowKind
-  factor : Int
+  factor : Int32
 } derive(Eq, @debug.Debug)
-pub fn CashFlowRule::new(String, CashFlowKind, factor? : Int) -> Self
+pub fn CashFlowRule::equal(Self, Self) -> Bool
+pub fn CashFlowRule::new(String, CashFlowKind, factor? : Int32) -> Self
+pub fn CashFlowRule::not_equal(Self, Self) -> Bool
+pub fn CashFlowRule::to_repr(Self) -> @debug.Repr
 
 pub struct CashRecord {
   reference : String
-  amount : Int
+  amount : Int32
 } derive(Eq, @debug.Debug)
-pub fn CashRecord::new(String, Int) -> Self
+pub fn CashRecord::equal(Self, Self) -> Bool
+pub fn CashRecord::new(String, Int32) -> Self
+pub fn CashRecord::not_equal(Self, Self) -> Bool
+pub fn CashRecord::to_repr(Self) -> @debug.Repr
 
 pub struct CsvImportResult {
   entries : Array[Entry]
   errors : Array[String]
 } derive(Eq, @debug.Debug)
+pub fn CsvImportResult::equal(Self, Self) -> Bool
+pub fn CsvImportResult::not_equal(Self, Self) -> Bool
+pub fn CsvImportResult::to_repr(Self) -> @debug.Repr
 
 pub struct Currency {
   code : String
   name : String
-  minor_units : Int
+  minor_units : Int32
 } derive(Eq, @debug.Debug)
-pub fn Currency::new(String, String, Int) -> Self
+pub fn Currency::equal(Self, Self) -> Bool
+pub fn Currency::new(String, String, Int32) -> Self
+pub fn Currency::not_equal(Self, Self) -> Bool
+pub fn Currency::to_repr(Self) -> @debug.Repr
 
 pub enum DatasetIssue {
-  InvalidEntry(Int, EntryValidation)
-  UnmappedEntry(Int, String)
-  DuplicateEntry(Int, Int)
+  InvalidEntry(Int32, EntryValidation)
+  UnmappedEntry(Int32, String)
+  DuplicateEntry(Int32, Int32)
 } derive(Eq, @debug.Debug)
+pub fn DatasetIssue::equal(Self, Self) -> Bool
+pub fn DatasetIssue::not_equal(Self, Self) -> Bool
+pub fn DatasetIssue::to_repr(Self) -> @debug.Repr
 
 pub struct DimensionLine {
   dimension : String
-  amount : Int
-  entries : Int
+  amount : Int32
+  entries : Int32
 } derive(Eq, @debug.Debug)
+pub fn DimensionLine::equal(Self, Self) -> Bool
+pub fn DimensionLine::not_equal(Self, Self) -> Bool
+pub fn DimensionLine::to_repr(Self) -> @debug.Repr
 
 pub struct DimensionTotal {
   dimension : String
-  amount : Int
-  entries : Int
+  amount : Int32
+  entries : Int32
 } derive(Eq, @debug.Debug)
+pub fn DimensionTotal::equal(Self, Self) -> Bool
+pub fn DimensionTotal::not_equal(Self, Self) -> Bool
+pub fn DimensionTotal::to_repr(Self) -> @debug.Repr
 
 pub struct EliminationRule {
   debit_account : String
   credit_account : String
 } derive(Eq, @debug.Debug)
+pub fn EliminationRule::equal(Self, Self) -> Bool
 pub fn EliminationRule::new(String, String) -> Self
+pub fn EliminationRule::not_equal(Self, Self) -> Bool
+pub fn EliminationRule::to_repr(Self) -> @debug.Repr
 
 pub struct Entity {
   name : String
   entries : Array[Entry]
 } derive(Eq, @debug.Debug)
+pub fn Entity::equal(Self, Self) -> Bool
 pub fn Entity::new(String, Array[Entry]) -> Self
+pub fn Entity::not_equal(Self, Self) -> Bool
+pub fn Entity::to_repr(Self) -> @debug.Repr
 
 pub struct Entry {
   account : String
   period : String
-  debit : Int
-  credit : Int
+  debit : Int32
+  credit : Int32
   cash : Bool
   dimension : String
 } derive(Eq, @debug.Debug)
-pub fn Entry::new(String, String, Int, Int, cash? : Bool) -> Self
-pub fn Entry::new_with_dimension(String, String, Int, Int, String, cash? : Bool) -> Self
+pub fn Entry::equal(Self, Self) -> Bool
+pub fn Entry::new(String, String, Int32, Int32, cash? : Bool) -> Self
+pub fn Entry::new_with_dimension(String, String, Int32, Int32, String, cash? : Bool) -> Self
+pub fn Entry::not_equal(Self, Self) -> Bool
+pub fn Entry::to_repr(Self) -> @debug.Repr
 
 pub enum EntryValidation {
   ValidEntry
@@ -303,27 +369,39 @@ pub enum EntryValidation {
   NegativeAmount
   UnbalancedEntry
 } derive(Eq, @debug.Debug)
+pub fn EntryValidation::equal(Self, Self) -> Bool
+pub fn EntryValidation::not_equal(Self, Self) -> Bool
+pub fn EntryValidation::to_repr(Self) -> @debug.Repr
 
 pub struct ExchangeRate {
   from : String
   to : String
-  numerator : Int
-  denominator : Int
+  numerator : Int32
+  denominator : Int32
 } derive(Eq, @debug.Debug)
-pub fn ExchangeRate::new(String, String, Int, Int) -> Self
+pub fn ExchangeRate::equal(Self, Self) -> Bool
+pub fn ExchangeRate::new(String, String, Int32, Int32) -> Self
+pub fn ExchangeRate::not_equal(Self, Self) -> Bool
+pub fn ExchangeRate::to_repr(Self) -> @debug.Repr
 
 pub struct ForecastPoint {
-  period : Int
-  amount : Int
-  source_average : Int
+  period : Int32
+  amount : Int32
+  source_average : Int32
 } derive(Eq, @debug.Debug)
+pub fn ForecastPoint::equal(Self, Self) -> Bool
+pub fn ForecastPoint::not_equal(Self, Self) -> Bool
+pub fn ForecastPoint::to_repr(Self) -> @debug.Repr
 
 pub struct HealthScore {
-  liquidity : Int
-  profitability : Int
-  leverage : Int
-  overall : Int
+  liquidity : Int32
+  profitability : Int32
+  leverage : Int32
+  overall : Int32
 } derive(Eq, @debug.Debug)
+pub fn HealthScore::equal(Self, Self) -> Bool
+pub fn HealthScore::not_equal(Self, Self) -> Bool
+pub fn HealthScore::to_repr(Self) -> @debug.Repr
 
 pub struct JournalEntry {
   id : String
@@ -332,80 +410,113 @@ pub struct JournalEntry {
   lines : Array[JournalLine]
 } derive(Eq, @debug.Debug)
 pub fn JournalEntry::add_line(Self, JournalLine) -> Unit
+pub fn JournalEntry::equal(Self, Self) -> Bool
 pub fn JournalEntry::new(String, String, String) -> Self
+pub fn JournalEntry::not_equal(Self, Self) -> Bool
+pub fn JournalEntry::to_repr(Self) -> @debug.Repr
 
 pub struct JournalLine {
   account : String
-  debit : Int
-  credit : Int
+  debit : Int32
+  credit : Int32
 } derive(Eq, @debug.Debug)
-pub fn JournalLine::new(String, Int, Int) -> Self
+pub fn JournalLine::equal(Self, Self) -> Bool
+pub fn JournalLine::new(String, Int32, Int32) -> Self
+pub fn JournalLine::not_equal(Self, Self) -> Bool
+pub fn JournalLine::to_repr(Self) -> @debug.Repr
 
 pub enum JournalValidation {
   BalancedJournal
   EmptyJournal
   InvalidJournalPeriod
-  UnbalancedJournal(Int)
+  UnbalancedJournal(Int32)
   InvalidJournalLine(String)
 } derive(Eq, @debug.Debug)
+pub fn JournalValidation::equal(Self, Self) -> Bool
+pub fn JournalValidation::not_equal(Self, Self) -> Bool
+pub fn JournalValidation::to_repr(Self) -> @debug.Repr
 
 pub struct LineItem {
   line : String
-  amount : Int
-  entries : Int
+  amount : Int32
+  entries : Int32
 } derive(Eq, @debug.Debug)
+pub fn LineItem::equal(Self, Self) -> Bool
+pub fn LineItem::not_equal(Self, Self) -> Bool
+pub fn LineItem::to_repr(Self) -> @debug.Repr
 
 pub enum MappingValidation {
   ValidMappings
   DuplicateAccount(String)
 } derive(Eq, @debug.Debug)
+pub fn MappingValidation::equal(Self, Self) -> Bool
+pub fn MappingValidation::not_equal(Self, Self) -> Bool
+pub fn MappingValidation::to_repr(Self) -> @debug.Repr
 
 pub enum PeriodResult {
   ValidPeriod(String)
   InvalidPeriod(String)
 } derive(Eq, @debug.Debug)
+pub fn PeriodResult::equal(Self, Self) -> Bool
+pub fn PeriodResult::not_equal(Self, Self) -> Bool
+pub fn PeriodResult::to_repr(Self) -> @debug.Repr
 
 pub struct RatioSet {
-  current_ratio : Int?
-  quick_ratio : Int?
-  gross_margin : Int?
-  operating_margin : Int?
-  debt_ratio : Int?
-  return_on_assets : Int?
+  current_ratio : Int32?
+  quick_ratio : Int32?
+  gross_margin : Int32?
+  operating_margin : Int32?
+  debt_ratio : Int32?
+  return_on_assets : Int32?
 } derive(Eq, @debug.Debug)
+pub fn RatioSet::equal(Self, Self) -> Bool
+pub fn RatioSet::not_equal(Self, Self) -> Bool
+pub fn RatioSet::to_repr(Self) -> @debug.Repr
 
 pub struct ReconciliationResult {
-  matched : Int
-  outstanding_ledger : Int
-  outstanding_statement : Int
-  ledger_total : Int
-  statement_total : Int
-  difference : Int
+  matched : Int32
+  outstanding_ledger : Int32
+  outstanding_statement : Int32
+  ledger_total : Int32
+  statement_total : Int32
+  difference : Int32
 } derive(Eq, @debug.Debug)
+pub fn ReconciliationResult::equal(Self, Self) -> Bool
+pub fn ReconciliationResult::not_equal(Self, Self) -> Bool
+pub fn ReconciliationResult::to_repr(Self) -> @debug.Repr
 
 pub struct Report {
   kind : StatementKind
   period : String
   lines : Array[LineItem]
-  total : Int
+  total : Int32
 } derive(Eq, @debug.Debug)
-pub fn Report::line(Self, String) -> Int?
+pub fn Report::equal(Self, Self) -> Bool
+pub fn Report::line(Self, String) -> Int32?
+pub fn Report::not_equal(Self, Self) -> Bool
 pub fn Report::to_csv(Self) -> String
 pub fn Report::to_html(Self) -> String
 pub fn Report::to_json(Self) -> String
 pub fn Report::to_markdown(Self) -> String
+pub fn Report::to_repr(Self) -> @debug.Repr
 
 pub struct ReportComparison {
   current : Report
   prior : Report
-  total_variance : Int
+  total_variance : Int32
 } derive(Eq, @debug.Debug)
+pub fn ReportComparison::equal(Self, Self) -> Bool
+pub fn ReportComparison::not_equal(Self, Self) -> Bool
+pub fn ReportComparison::to_repr(Self) -> @debug.Repr
 
 pub struct ReportPack {
   period : String
   reports : Array[Report]
 } derive(Eq, @debug.Debug)
+pub fn ReportPack::equal(Self, Self) -> Bool
+pub fn ReportPack::not_equal(Self, Self) -> Bool
 pub fn ReportPack::to_markdown(Self) -> String
+pub fn ReportPack::to_repr(Self) -> @debug.Repr
 
 pub(all) enum StatementKind {
   BalanceSheet
@@ -413,58 +524,82 @@ pub(all) enum StatementKind {
   CashFlowStatement
   Management
 } derive(Eq, @debug.Debug)
+pub fn StatementKind::equal(Self, Self) -> Bool
+pub fn StatementKind::not_equal(Self, Self) -> Bool
+pub fn StatementKind::to_repr(Self) -> @debug.Repr
 
 pub struct TaxRule {
   account : String
   treatment : TaxTreatment
 } derive(Eq, @debug.Debug)
+pub fn TaxRule::equal(Self, Self) -> Bool
 pub fn TaxRule::new(String, TaxTreatment) -> Self
+pub fn TaxRule::not_equal(Self, Self) -> Bool
+pub fn TaxRule::to_repr(Self) -> @debug.Repr
 
 pub struct TaxSummary {
   period : String
-  revenue : Int
-  deductions : Int
-  base : Int
-  rate : Int
-  tax : Int
+  revenue : Int32
+  deductions : Int32
+  base : Int32
+  rate : Int32
+  tax : Int32
 } derive(Eq, @debug.Debug)
+pub fn TaxSummary::equal(Self, Self) -> Bool
+pub fn TaxSummary::not_equal(Self, Self) -> Bool
+pub fn TaxSummary::to_repr(Self) -> @debug.Repr
 
 pub(all) enum TaxTreatment {
   TaxableRevenue
   DeductibleExpense
   Exempt
 } derive(Eq, @debug.Debug)
+pub fn TaxTreatment::equal(Self, Self) -> Bool
+pub fn TaxTreatment::not_equal(Self, Self) -> Bool
+pub fn TaxTreatment::to_repr(Self) -> @debug.Repr
 
 pub struct TrendPoint {
   period : String
-  amount : Int
-  change : Int
+  amount : Int32
+  change : Int32
   direction : String
 } derive(Eq, @debug.Debug)
+pub fn TrendPoint::equal(Self, Self) -> Bool
+pub fn TrendPoint::not_equal(Self, Self) -> Bool
+pub fn TrendPoint::to_repr(Self) -> @debug.Repr
 
 pub struct TrialBalance {
   lines : Array[TrialBalanceLine]
-  total_debit : Int
-  total_credit : Int
+  total_debit : Int32
+  total_credit : Int32
   balanced : Bool
 } derive(Eq, @debug.Debug)
+pub fn TrialBalance::equal(Self, Self) -> Bool
+pub fn TrialBalance::not_equal(Self, Self) -> Bool
+pub fn TrialBalance::to_repr(Self) -> @debug.Repr
 
 pub struct TrialBalanceLine {
   account : String
-  debit : Int
-  credit : Int
-  balance : Int
+  debit : Int32
+  credit : Int32
+  balance : Int32
 } derive(Eq, @debug.Debug)
+pub fn TrialBalanceLine::equal(Self, Self) -> Bool
+pub fn TrialBalanceLine::not_equal(Self, Self) -> Bool
+pub fn TrialBalanceLine::to_repr(Self) -> @debug.Repr
 
 pub struct Variance {
   line : String
-  current : Int
-  prior : Int
-  absolute : Int
-  percent : Int?
+  current : Int32
+  prior : Int32
+  absolute : Int32
+  percent : Int32?
 } derive(Eq, @debug.Debug)
+pub fn Variance::equal(Self, Self) -> Bool
+pub fn Variance::not_equal(Self, Self) -> Bool
+pub fn Variance::to_repr(Self) -> @debug.Repr
 
 // Type aliases
-pub type Amount = Int
+pub type Amount = Int32
 
 // Traits

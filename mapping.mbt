@@ -3,9 +3,9 @@ pub fn AccountMapping::new(
   account : String,
   line : String,
   kind : StatementKind,
-  factor? : Int = 1,
+  factor~ : Int32 = 1,
 ) -> AccountMapping {
-  { account, line, kind, factor }
+  { account, line, kind, factor, }
 }
 
 ///|
@@ -14,9 +14,9 @@ pub fn Entry::new(
   period : String,
   debit : Amount,
   credit : Amount,
-  cash? : Bool = false,
+  cash~ : Bool = false,
 ) -> Entry {
-  { account, period, debit, credit, cash, dimension: "" }
+  { account, period, debit, credit, cash, dimension: "", }
 }
 
 ///|
@@ -26,9 +26,9 @@ pub fn Entry::new_with_dimension(
   debit : Amount,
   credit : Amount,
   dimension : String,
-  cash? : Bool = false,
+  cash~ : Bool = false,
 ) -> Entry {
-  { account, period, debit, credit, cash, dimension }
+  { account, period, debit, credit, cash, dimension, }
 }
 
 ///|

@@ -3,8 +3,14 @@
 pub struct DimensionTotal {
   dimension : String
   amount : Amount
-  entries : Int
+  entries : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend DimensionTotal with Eq::{not_equal, equal}
+
+///|
+pub extend DimensionTotal with @debug.Debug::{to_repr}
 
 ///|
 pub fn group_by_dimension(
@@ -29,7 +35,7 @@ pub fn group_by_dimension(
       }
     }
     if find_dimension_total(result, key) is None {
-      result.push({ dimension: key, amount, entries: 1 })
+      result.push({ dimension: key, amount, entries: 1, })
     }
   }
   result
@@ -58,7 +64,7 @@ pub fn growth_percent(previous : Amount, current : Amount) -> Amount? {
 }
 
 ///|
-pub fn weighted_average(values : Array[(Amount, Int)]) -> Amount? {
+pub fn weighted_average(values : Array[(Amount, Int32)]) -> Amount? {
   let mut total = 0
   let mut weight = 0
   for pair in values {
@@ -87,7 +93,7 @@ pub fn net_margin(revenue : Amount, expenses : Amount) -> Amount? {
 }
 
 ///|
-pub fn burn_rate(expenses : Array[Amount], periods : Int) -> Amount? {
+pub fn burn_rate(expenses : Array[Amount], periods : Int32) -> Amount? {
   if periods <= 0 {
     None
   } else {

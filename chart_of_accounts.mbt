@@ -9,6 +9,12 @@ pub enum AccountClass {
 } derive(Debug, Eq)
 
 ///|
+pub extend AccountClass with Eq::{not_equal, equal}
+
+///|
+pub extend AccountClass with @debug.Debug::{to_repr}
+
+///|
 pub struct AccountDefinition {
   code : String
   name : String
@@ -17,13 +23,19 @@ pub struct AccountDefinition {
 } derive(Debug, Eq)
 
 ///|
+pub extend AccountDefinition with Eq::{not_equal, equal}
+
+///|
+pub extend AccountDefinition with @debug.Debug::{to_repr}
+
+///|
 pub fn AccountDefinition::new(
   code : String,
   name : String,
   class : AccountClass,
   normal_debit : Bool,
 ) -> AccountDefinition {
-  { code, name, class, normal_debit }
+  { code, name, class, normal_debit, }
 }
 
 ///|

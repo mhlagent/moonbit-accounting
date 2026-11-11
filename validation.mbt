@@ -6,10 +6,22 @@ pub enum BatchValidation {
 } derive(Debug, Eq)
 
 ///|
+pub extend BatchValidation with Eq::{not_equal, equal}
+
+///|
+pub extend BatchValidation with @debug.Debug::{to_repr}
+
+///|
 pub enum MappingValidation {
   ValidMappings
   DuplicateAccount(String)
 } derive(Debug, Eq)
+
+///|
+pub extend MappingValidation with Eq::{not_equal, equal}
+
+///|
+pub extend MappingValidation with @debug.Debug::{to_repr}
 
 ///|
 pub fn validate_batch(entries : Array[Entry]) -> BatchValidation {

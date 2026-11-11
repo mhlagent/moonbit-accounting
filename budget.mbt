@@ -5,8 +5,14 @@ pub struct BudgetLine {
 } derive(Debug, Eq)
 
 ///|
+pub extend BudgetLine with Eq::{not_equal, equal}
+
+///|
+pub extend BudgetLine with @debug.Debug::{to_repr}
+
+///|
 pub fn BudgetLine::new(line : String, amount : Amount) -> BudgetLine {
-  { line, amount }
+  { line, amount, }
 }
 
 ///|
@@ -17,6 +23,12 @@ pub struct BudgetVariance {
   variance : Amount
   favorable : Bool
 } derive(Debug, Eq)
+
+///|
+pub extend BudgetVariance with Eq::{not_equal, equal}
+
+///|
+pub extend BudgetVariance with @debug.Debug::{to_repr}
 
 ///|
 pub fn budget_variance(

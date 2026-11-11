@@ -3,8 +3,14 @@
 pub struct AgingBucket {
   label : String
   amount : Amount
-  entries : Int
+  entries : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend AgingBucket with Eq::{not_equal, equal}
+
+///|
+pub extend AgingBucket with @debug.Debug::{to_repr}
 
 ///|
 pub fn age_receivables(
@@ -13,10 +19,10 @@ pub fn age_receivables(
   as_of : String,
 ) -> Array[AgingBucket] {
   let buckets = [
-    { label: "current", amount: 0, entries: 0 },
-    { label: "1 quarter", amount: 0, entries: 0 },
-    { label: "2 quarters", amount: 0, entries: 0 },
-    { label: "3+ quarters", amount: 0, entries: 0 },
+    { label: "current", amount: 0, entries: 0, },
+    { label: "1 quarter", amount: 0, entries: 0, },
+    { label: "2 quarters", amount: 0, entries: 0, },
+    { label: "3+ quarters", amount: 0, entries: 0, },
   ]
   for entry in entries {
     if entry.account != account || entry.debit <= entry.credit {
@@ -43,7 +49,7 @@ pub fn age_receivables(
 }
 
 ///|
-pub fn period_distance(older : String, newer : String) -> Int {
+pub fn period_distance(older : String, newer : String) -> Int32 {
   match (period_parts(older), period_parts(newer)) {
     (Some((oy, oq)), Some((ny, nq))) => (ny - oy) * 4 + nq - oq
     _ => 0
@@ -51,7 +57,7 @@ pub fn period_distance(older : String, newer : String) -> Int {
 }
 
 ///|
-fn period_parts(period : String) -> (Int, Int)? {
+fn period_parts(period : String) -> (Int32, Int32)? {
   match validate_period(period) {
     InvalidPeriod(_) => None
     ValidPeriod(value) => {
@@ -63,7 +69,7 @@ fn period_parts(period : String) -> (Int, Int)? {
 }
 
 ///|
-fn parse_year(text : String) -> Int {
+fn parse_year(text : String) -> Int32 {
   let mut value = 0
   for c in text {
     value = value * 10 + c.to_int() - '0'.to_int()

@@ -7,6 +7,12 @@ pub struct TrendPoint {
 } derive(Debug, Eq)
 
 ///|
+pub extend TrendPoint with Eq::{not_equal, equal}
+
+///|
+pub extend TrendPoint with @debug.Debug::{to_repr}
+
+///|
 pub fn trend_points(values : Array[(String, Amount)]) -> Array[TrendPoint] {
   let result : Array[TrendPoint] = []
   let mut previous = 0
@@ -22,7 +28,7 @@ pub fn trend_points(values : Array[(String, Amount)]) -> Array[TrendPoint] {
     } else {
       "flat"
     }
-    result.push({ period, amount, change, direction })
+    result.push({ period, amount, change, direction, })
     previous = amount
     first = false
   }
@@ -30,7 +36,7 @@ pub fn trend_points(values : Array[(String, Amount)]) -> Array[TrendPoint] {
 }
 
 ///|
-pub fn moving_average(values : Array[Amount], window : Int) -> Array[Amount] {
+pub fn moving_average(values : Array[Amount], window : Int32) -> Array[Amount] {
   let result : Array[Amount] = []
   if window <= 0 {
     return result
@@ -49,7 +55,11 @@ pub fn moving_average(values : Array[Amount], window : Int) -> Array[Amount] {
 }
 
 ///|
-pub fn compound_change(first : Amount, last : Amount, periods : Int) -> Amount? {
+pub fn compound_change(
+  first : Amount,
+  last : Amount,
+  periods : Int32,
+) -> Amount? {
   if periods <= 0 || first == 0 {
     None
   } else {

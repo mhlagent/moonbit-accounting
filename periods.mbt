@@ -5,6 +5,12 @@ pub enum PeriodResult {
 } derive(Debug, Eq)
 
 ///|
+pub extend PeriodResult with Eq::{not_equal, equal}
+
+///|
+pub extend PeriodResult with @debug.Debug::{to_repr}
+
+///|
 pub fn validate_period(period : String) -> PeriodResult {
   if period.length() != 7 || period[4] != '-' || period[5] != 'Q' {
     return InvalidPeriod(period)
@@ -28,7 +34,7 @@ pub fn validate_period(period : String) -> PeriodResult {
 }
 
 ///|
-pub fn compare_period(left : String, right : String) -> Int {
+pub fn compare_period(left : String, right : String) -> Int32 {
   if left == right {
     return 0
   }

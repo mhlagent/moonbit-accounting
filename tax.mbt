@@ -7,14 +7,26 @@ pub(all) enum TaxTreatment {
 } derive(Debug, Eq)
 
 ///|
+pub extend TaxTreatment with Eq::{not_equal, equal}
+
+///|
+pub extend TaxTreatment with @debug.Debug::{to_repr}
+
+///|
 pub struct TaxRule {
   account : String
   treatment : TaxTreatment
 } derive(Debug, Eq)
 
 ///|
+pub extend TaxRule with Eq::{not_equal, equal}
+
+///|
+pub extend TaxRule with @debug.Debug::{to_repr}
+
+///|
 pub fn TaxRule::new(account : String, treatment : TaxTreatment) -> TaxRule {
-  { account, treatment }
+  { account, treatment, }
 }
 
 ///|
@@ -23,16 +35,22 @@ pub struct TaxSummary {
   revenue : Amount
   deductions : Amount
   base : Amount
-  rate : Int
+  rate : Int32
   tax : Amount
 } derive(Debug, Eq)
+
+///|
+pub extend TaxSummary with Eq::{not_equal, equal}
+
+///|
+pub extend TaxSummary with @debug.Debug::{to_repr}
 
 ///|
 pub fn tax_summary(
   entries : Array[Entry],
   period : String,
   rules : Array[TaxRule],
-  rate~ : Int,
+  rate~ : Int32,
 ) -> TaxSummary {
   let mut revenue = 0
   let mut deductions = 0
@@ -51,7 +69,7 @@ pub fn tax_summary(
     }
   }
   let base = if revenue > deductions { revenue - deductions } else { 0 }
-  { period, revenue, deductions, base, rate, tax: base * rate / 100 }
+  { period, revenue, deductions, base, rate, tax: base * rate / 100, }
 }
 
 ///|
@@ -65,7 +83,7 @@ fn find_tax_rule(rules : Array[TaxRule], account : String) -> TaxRule? {
 }
 
 ///|
-pub fn tax_amount(base : Amount, rate : Int) -> Amount {
+pub fn tax_amount(base : Amount, rate : Int32) -> Amount {
   if base <= 0 || rate <= 0 {
     0
   } else {

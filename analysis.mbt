@@ -10,6 +10,12 @@ pub struct RatioSet {
 } derive(Debug, Eq)
 
 ///|
+pub extend RatioSet with Eq::{not_equal, equal}
+
+///|
+pub extend RatioSet with @debug.Debug::{to_repr}
+
+///|
 pub fn analyze_ratios(
   assets : Amount,
   current_assets : Amount,
@@ -39,6 +45,12 @@ pub struct Variance {
   absolute : Amount
   percent : Amount?
 } derive(Debug, Eq)
+
+///|
+pub extend Variance with Eq::{not_equal, equal}
+
+///|
+pub extend Variance with @debug.Debug::{to_repr}
 
 ///|
 pub fn variance(line : String, current : Amount, prior : Amount) -> Variance {
@@ -76,6 +88,12 @@ pub struct HealthScore {
   leverage : Amount
   overall : Amount
 } derive(Debug, Eq)
+
+///|
+pub extend HealthScore with Eq::{not_equal, equal}
+
+///|
+pub extend HealthScore with @debug.Debug::{to_repr}
 
 ///|
 pub fn health_score(ratios : RatioSet) -> HealthScore {

@@ -6,6 +6,12 @@ pub struct CsvImportResult {
 } derive(Debug, Eq)
 
 ///|
+pub extend CsvImportResult with Eq::{not_equal, equal}
+
+///|
+pub extend CsvImportResult with @debug.Debug::{to_repr}
+
+///|
 pub fn import_entries_csv(csv : String) -> CsvImportResult {
   let entries : Array[Entry] = []
   let errors : Array[String] = []
@@ -36,7 +42,7 @@ pub fn import_entries_csv(csv : String) -> CsvImportResult {
     }
     row += 1
   }
-  { entries, errors }
+  { entries, errors, }
 }
 
 ///|

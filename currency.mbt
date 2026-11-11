@@ -3,49 +3,55 @@
 pub struct Currency {
   code : String
   name : String
-  minor_units : Int
+  minor_units : Int32
 } derive(Debug, Eq)
+
+///|
+pub extend Currency with Eq::{not_equal, equal}
+
+///|
+pub extend Currency with @debug.Debug::{to_repr}
 
 ///|
 pub fn Currency::new(
   code : String,
   name : String,
-  minor_units : Int,
+  minor_units : Int32,
 ) -> Currency {
-  { code, name, minor_units }
+  { code, name, minor_units, }
 }
 
 ///|
 pub fn currency(code : String) -> Currency? {
   match code {
-    "USD" => Some({ code: "USD", name: "US dollar", minor_units: 2 })
-    "EUR" => Some({ code: "EUR", name: "Euro", minor_units: 2 })
-    "CNY" => Some({ code: "CNY", name: "Chinese yuan", minor_units: 2 })
-    "JPY" => Some({ code: "JPY", name: "Japanese yen", minor_units: 0 })
-    "GBP" => Some({ code: "GBP", name: "Pound sterling", minor_units: 2 })
-    "AUD" => Some({ code: "AUD", name: "Australian dollar", minor_units: 2 })
-    "CAD" => Some({ code: "CAD", name: "Canadian dollar", minor_units: 2 })
-    "CHF" => Some({ code: "CHF", name: "Swiss franc", minor_units: 2 })
-    "HKD" => Some({ code: "HKD", name: "Hong Kong dollar", minor_units: 2 })
-    "SGD" => Some({ code: "SGD", name: "Singapore dollar", minor_units: 2 })
-    "KRW" => Some({ code: "KRW", name: "South Korean won", minor_units: 0 })
-    "INR" => Some({ code: "INR", name: "Indian rupee", minor_units: 2 })
-    "BRL" => Some({ code: "BRL", name: "Brazilian real", minor_units: 2 })
-    "MXN" => Some({ code: "MXN", name: "Mexican peso", minor_units: 2 })
-    "NZD" => Some({ code: "NZD", name: "New Zealand dollar", minor_units: 2 })
-    "SEK" => Some({ code: "SEK", name: "Swedish krona", minor_units: 2 })
-    "NOK" => Some({ code: "NOK", name: "Norwegian krone", minor_units: 2 })
-    "DKK" => Some({ code: "DKK", name: "Danish krone", minor_units: 2 })
-    "PLN" => Some({ code: "PLN", name: "Polish zloty", minor_units: 2 })
-    "THB" => Some({ code: "THB", name: "Thai baht", minor_units: 2 })
-    "VND" => Some({ code: "VND", name: "Vietnamese dong", minor_units: 0 })
-    "TWD" => Some({ code: "TWD", name: "New Taiwan dollar", minor_units: 0 })
-    "ZAR" => Some({ code: "ZAR", name: "South African rand", minor_units: 2 })
-    "AED" => Some({ code: "AED", name: "UAE dirham", minor_units: 2 })
-    "SAR" => Some({ code: "SAR", name: "Saudi riyal", minor_units: 2 })
-    "TRY" => Some({ code: "TRY", name: "Turkish lira", minor_units: 2 })
-    "ILS" => Some({ code: "ILS", name: "Israeli new shekel", minor_units: 2 })
-    "RUB" => Some({ code: "RUB", name: "Russian ruble", minor_units: 2 })
+    "USD" => Some({ code: "USD", name: "US dollar", minor_units: 2, })
+    "EUR" => Some({ code: "EUR", name: "Euro", minor_units: 2, })
+    "CNY" => Some({ code: "CNY", name: "Chinese yuan", minor_units: 2, })
+    "JPY" => Some({ code: "JPY", name: "Japanese yen", minor_units: 0, })
+    "GBP" => Some({ code: "GBP", name: "Pound sterling", minor_units: 2, })
+    "AUD" => Some({ code: "AUD", name: "Australian dollar", minor_units: 2, })
+    "CAD" => Some({ code: "CAD", name: "Canadian dollar", minor_units: 2, })
+    "CHF" => Some({ code: "CHF", name: "Swiss franc", minor_units: 2, })
+    "HKD" => Some({ code: "HKD", name: "Hong Kong dollar", minor_units: 2, })
+    "SGD" => Some({ code: "SGD", name: "Singapore dollar", minor_units: 2, })
+    "KRW" => Some({ code: "KRW", name: "South Korean won", minor_units: 0, })
+    "INR" => Some({ code: "INR", name: "Indian rupee", minor_units: 2, })
+    "BRL" => Some({ code: "BRL", name: "Brazilian real", minor_units: 2, })
+    "MXN" => Some({ code: "MXN", name: "Mexican peso", minor_units: 2, })
+    "NZD" => Some({ code: "NZD", name: "New Zealand dollar", minor_units: 2, })
+    "SEK" => Some({ code: "SEK", name: "Swedish krona", minor_units: 2, })
+    "NOK" => Some({ code: "NOK", name: "Norwegian krone", minor_units: 2, })
+    "DKK" => Some({ code: "DKK", name: "Danish krone", minor_units: 2, })
+    "PLN" => Some({ code: "PLN", name: "Polish zloty", minor_units: 2, })
+    "THB" => Some({ code: "THB", name: "Thai baht", minor_units: 2, })
+    "VND" => Some({ code: "VND", name: "Vietnamese dong", minor_units: 0, })
+    "TWD" => Some({ code: "TWD", name: "New Taiwan dollar", minor_units: 0, })
+    "ZAR" => Some({ code: "ZAR", name: "South African rand", minor_units: 2, })
+    "AED" => Some({ code: "AED", name: "UAE dirham", minor_units: 2, })
+    "SAR" => Some({ code: "SAR", name: "Saudi riyal", minor_units: 2, })
+    "TRY" => Some({ code: "TRY", name: "Turkish lira", minor_units: 2, })
+    "ILS" => Some({ code: "ILS", name: "Israeli new shekel", minor_units: 2, })
+    "RUB" => Some({ code: "RUB", name: "Russian ruble", minor_units: 2, })
     _ => None
   }
 }
@@ -55,8 +61,8 @@ pub fn convert_minor(
   amount : Amount,
   from : Currency,
   to : Currency,
-  rate_numerator : Int,
-  rate_denominator : Int,
+  rate_numerator : Int32,
+  rate_denominator : Int32,
 ) -> Amount? {
   if rate_denominator == 0 {
     None
@@ -73,7 +79,7 @@ pub fn convert_minor(
 }
 
 ///|
-fn scale10(power : Int) -> Int {
+fn scale10(power : Int32) -> Int32 {
   let mut value = 1
   for _ in 0..<power {
     value *= 10

@@ -1,15 +1,21 @@
 ///|
 /// Forecasts are intentionally transparent run-rate projections.
 pub struct ForecastPoint {
-  period : Int
+  period : Int32
   amount : Amount
   source_average : Amount
 } derive(Debug, Eq)
 
 ///|
+pub extend ForecastPoint with Eq::{not_equal, equal}
+
+///|
+pub extend ForecastPoint with @debug.Debug::{to_repr}
+
+///|
 pub fn forecast_run_rate(
   history : Array[Amount],
-  periods : Int,
+  periods : Int32,
 ) -> Array[ForecastPoint] {
   let result : Array[ForecastPoint] = []
   if history.length() == 0 || periods <= 0 {
@@ -21,7 +27,7 @@ pub fn forecast_run_rate(
   }
   let average = total / history.length()
   for index in 0..<periods {
-    result.push({ period: index + 1, amount: average, source_average: average })
+    result.push({ period: index + 1, amount: average, source_average: average, })
   }
   result
 }
@@ -29,7 +35,7 @@ pub fn forecast_run_rate(
 ///|
 pub fn forecast_linear(
   history : Array[Amount],
-  periods : Int,
+  periods : Int32,
 ) -> Array[ForecastPoint] {
   let result : Array[ForecastPoint] = []
   if history.length() == 0 || periods <= 0 {
@@ -47,7 +53,7 @@ pub fn forecast_linear(
   }
   for index in 0..<periods {
     let amount = average + slope * (index + 1)
-    result.push({ period: index + 1, amount, source_average: average })
+    result.push({ period: index + 1, amount, source_average: average, })
   }
   result
 }
