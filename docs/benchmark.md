@@ -10,10 +10,10 @@ Command:
 moon run cmd/main --target native
 ```
 
-Observed benchmark line on 2026-11-11 with MoonBit 0.10.16:
+Observed benchmark line on 2026-11-11 with MoonBit 0.10.20:
 
 ```text
-entries=10000 mappings=10000 lines=16 total=489604 elapsed_ms=92
+entries=10000 mappings=10000 lines=16 total=489604 elapsed_ms=89
 ```
 
 The fixture creates 10,000 normalized entries and mappings, aggregates them

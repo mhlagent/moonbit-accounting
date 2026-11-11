@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Migrated derived trait syntax to `#derive(Debug, Eq)` with explicit Eq/Debug extensions for MoonBit 0.10.20.
+- Verified checks and tests on wasm, wasm-gc, js, and native.
+- Updated compatibility and benchmark records.
+
 ## 0.3.0
 
 - Added journal validation and flattening into normalized entries.

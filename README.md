@@ -60,9 +60,9 @@ recorded run is documented in [docs/benchmark.md](docs/benchmark.md).
 
 Verified on 2026-11-11 with:
 
-- `moon 0.1.20261016`
-- `moonc v0.10.16+b1a0e846e`
-- `moonrun 0.1.20261016`
+- `moon 0.1.20261104`
+- `moonc v0.10.20+65efd5b93`
+- `moonrun 0.1.20261104`
 
 Targets checked by CI: `wasm`, `wasm-gc`, `js`, and `native`. The CLI smoke
 test runs on the native backend. The package continues to use the official
