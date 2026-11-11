@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2
+
+- Expanded tests from 26 to 55.
+- Raised native coverage from 473/752 to 727/752.
+- Fixed CSV escaping when a field contains multiple double quotes.
+- Added edge coverage for tax, HTML, aging, trend, ledger, journal, metrics, forecast, serialization, CSV import, consolidation, and period reports.
+
 ## 0.3.1
 
 - Migrated derived trait syntax to `#derive(Debug, Eq)` with explicit Eq/Debug extensions for MoonBit 0.10.20.

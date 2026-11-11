@@ -70,11 +70,12 @@ MoonBit toolchain and has no external runtime dependencies.
 
 ## Testing and CI
 
-Tests cover malformed periods, unbalanced batches, duplicate mappings,
+55 tests cover malformed periods, unbalanced batches, duplicate mappings,
 comparisons, dimensions, ratios, budgets, consolidation, renderers, catalog
-lookups, and deterministic fixtures. GitHub Actions checks formatting, strict
-type checking, all targets, native tests, coverage, and generated interfaces
-on Ubuntu, macOS, and Windows.
+lookups, tax edge cases, journal validation, forecasts, CSV/JSON escaping,
+and deterministic fixtures. Native coverage is 727/752 lines (96.7%).
+GitHub Actions checks formatting, strict type checking, all targets, native
+tests, coverage, and generated interfaces on Ubuntu, macOS, and Windows.
 
 ## License
 

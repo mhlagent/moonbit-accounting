@@ -11,7 +11,7 @@ fn statement_name(kind : StatementKind) -> String {
 ///|
 fn escape_csv(value : String) -> String {
   if value.contains(",") || value.contains("\"") {
-    "\"" + value.replace(old="\"", new="\"\"") + "\""
+    "\"" + value.replace_all(old="\"", new="\"\"") + "\""
   } else {
     value
   }
